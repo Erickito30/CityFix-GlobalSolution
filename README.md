@@ -31,5 +31,9 @@ ODS 9 (Indústria, Inovação e Infraestrutura), ODS 10 (Redução das Desiguald
 - nuneslucas23 — Lucas
 - Joaovictor23-coder — João
 
+## Ferramentas de inteligência artificial
+- **GitHub Copilot:** utilizado como ferramenta de apoio para criar a estrutura inicial das páginas HTML, o CSS compartilhado, o JavaScript inicial e a documentação do projeto. O conteúdo gerado foi revisado, alterado pela equipe.
+- Claude - Utilizado como ferramenta de Brainstorming para, decisão e organizaçâo dos elementos e também, para qual caminho o projeto decidiria caminhar para o Início do desenvolvimento do mesmo.
+  
 ## Executar
 Abra `index.html` em um navegador. O projeto é estático e não requer dependências nesta etapa.
