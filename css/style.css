@@ -1,0 +1,66 @@
+:root {
+  color-scheme: light;
+  --color-ink: #17324d;
+  --color-muted: #526579;
+  --color-primary: #087f8c;
+  --color-primary-dark: #05616b;
+  --color-surface: #ffffff;
+  --color-background: #f3f8fa;
+  --color-border: #d7e3e8;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-ink);
+  background: var(--color-background);
+  line-height: 1.6;
+}
+
+a { color: var(--color-primary-dark); }
+a:focus-visible, button:focus-visible { outline: 3px solid #f0a202; outline-offset: 3px; }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem max(1.25rem, calc((100% - 1120px) / 2));
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.brand { color: var(--color-primary-dark); font-size: 1.5rem; font-weight: 800; text-decoration: none; }
+.nav-list { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+.nav-list a { font-weight: 650; text-decoration: none; }
+.nav-list a:hover, .nav-list a[aria-current="page"] { text-decoration: underline; text-underline-offset: .3em; }
+
+main { width: min(100% - 2.5rem, 960px); margin: 0 auto; flex: 1; }
+.hero, .page-heading { padding: clamp(3rem, 8vw, 6.5rem) 0 2.5rem; }
+.hero { max-width: 760px; }
+h1 { max-width: 800px; margin: .25rem 0 1rem; font-size: clamp(2.25rem, 6vw, 4rem); line-height: 1.1; }
+h2 { margin-top: 0; font-size: clamp(1.4rem, 3vw, 2rem); }
+p { color: var(--color-muted); }
+.eyebrow { color: var(--color-primary-dark); font-size: .85rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.content-section { margin: 1.5rem 0; padding: clamp(1.25rem, 4vw, 2rem); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 1rem; }
+.button { display: inline-block; margin-top: .75rem; padding: .75rem 1.1rem; color: #fff; background: var(--color-primary); border-radius: .5rem; font-weight: 700; text-decoration: none; }
+.button:hover { background: var(--color-primary-dark); }
+.steps-list li, .team-list li { margin: .65rem 0; }
+.ods-list { padding-top: .75rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin: 0; }
+.stat-card { padding: 1.1rem; background: var(--color-background); border-radius: .75rem; }
+.stat-card dt { color: var(--color-muted); font-weight: 650; }
+.stat-card dd { margin: .35rem 0 0; color: var(--color-primary-dark); font-size: 1.6rem; font-weight: 800; }
+.site-footer { margin-top: 3rem; padding: 1rem 1.25rem; text-align: center; background: var(--color-surface); border-top: 1px solid var(--color-border); }
+.site-footer p { margin: 0; font-size: .9rem; }
+
+@media (max-width: 600px) {
+  .site-header { align-items: flex-start; flex-direction: column; }
+  .nav-list { gap: .5rem 1rem; }
+}
