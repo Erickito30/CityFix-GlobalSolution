@@ -1,0 +1,88 @@
+PLANO DE TRABALHO — CITYFIX
+================================
+
+Objetivo
+--------
+Construir e integrar o protótipo CityFix: registro de problemas urbanos, listagem de ocorrências, filtros, apoios e indicadores de impacto. Trabalhem em conjunto e avisem o Erick quando precisarem alterar IDs, classes ou arquivos que outra pessoa está usando.
+
+REGRAS GERAIS
+-------------
+- Antes de começar: atualizem a cópia local com `git pull`.
+- Depois de concluir e testar uma parte: `git add`, `git commit` e `git push`.
+- Confiram se estão na branch certa antes de enviar mudanças. Evitem sobrescrever o trabalho de outra pessoa; comuniquem conflitos antes de resolvê-los.
+- Não usar CSS inline, bibliotecas externas nem `alert()`.
+- Manter o HTML semântico e as páginas funcionando em celular e computador.
+- Combinem alterações de interface antes de mudar IDs, classes, nomes de arquivos ou funções.
+
+DIVISÃO DE TAREFAS
+------------------
+
+LUCAS — DADOS, SIMULAÇÃO E INDICADORES (parte de maior peso)
+Arquivos: `js/dados.js` e `js/simulacao.js`
+
+1. Em `dados.js`, declarar o array global `ocorrencias` com pelo menos 10 objetos.
+2. Usar exatamente o mesmo formato nos objetos:
+   `{ id, tipo, bairro, descricao, status, votos }`
+3. Usar valores consistentes para os tipos e status. Status previstos: `Aberta`, `Em análise` e `Resolvida`.
+4. Em `simulacao.js`, implementar `renderizarOcorrencias()` para desenhar os dados na página usando o DOM.
+5. Implementar os filtros por tipo, bairro e status. Os três filtros devem poder ser usados juntos; filtro vazio significa “todos”.
+6. Implementar o botão “Apoiar”: somar um voto à ocorrência correta, reordenar por votos e atualizar a lista.
+7. Calcular os indicadores da página `impacto.html` a partir do mesmo array: total, percentual resolvido e ocorrência mais apoiada. Não manter uma segunda cópia dos dados.
+8. Testar a lista inicial, cada filtro sozinho, combinações de filtros, apoio e indicadores.
+
+PIETRO — FORMULÁRIO E TEXTOS
+Arquivo: `js/formulario.js` e conteúdo textual das páginas
+
+1. Validar em JavaScript os campos obrigatórios do formulário. Exibir mensagens de erro ou sucesso dentro da página; não usar `alert()`.
+2. Se o formulário estiver válido, criar um objeto com o mesmo formato de `ocorrencias`, atribuir um ID único e iniciar `votos` em 0.
+3. Adicionar o objeto ao array existente e chamar `renderizarOcorrencias()` para atualizar a lista. Confirmar com Lucas o nome e a forma de acesso ao array e à função.
+4. Escrever/revisar o texto inicial com: cidadão afetado, problema, dado do IBGE com fonte, proposta e ODS.
+5. Escrever/revisar o texto de impacto explicando a relação com os ODS 9, 10 e 11.
+6. Testar envio inválido e válido, mensagens, limpeza do formulário (se implementada) e exibição da nova ocorrência.
+
+JOÃO — VISUAL, ACESSIBILIDADE E EQUIPE
+Arquivos: `css/style.css` e `equipe.html`
+
+1. Fazer o CSS responsivo com Flexbox e/ou Grid e media queries; testar em tela pequena e grande.
+2. Garantir foco visível em links, botões e campos, contraste legível e navegação completa por teclado.
+3. Conferir que cada campo tem um `<label>` associado e que toda imagem informativa tem texto `alt` adequado (imagens decorativas podem usar `alt=""`).
+4. Montar a página da equipe com nome e RM de cada integrante. Confirmar os RMs com todos antes de publicar; não inventar números.
+5. Diferencial, se houver tempo: botão de alto contraste ou controle para aumentar a fonte, acessível por teclado e com rótulo claro.
+
+ERICK — INTEGRAÇÃO E REVISÃO
+
+1. Coordenar os combinados de HTML, IDs, classes e nomes de funções para as partes se encaixarem.
+2. Atualizar o esqueleto HTML quando necessário para incluir os campos, filtros, lista e mensagens previstos abaixo, preservando o menu comum e as tags semânticas.
+3. Conferir a ordem e as páginas que carregam os scripts e fazer a integração final.
+4. Testar o projeto completo e verificar links, textos, funcionamento e acessibilidade antes da entrega.
+
+CONTRATO DE INTEGRAÇÃO (NOMES COMBINADOS)
+-----------------------------------------
+Estes nomes são a proposta comum para evitar incompatibilidades. Confirmem com o grupo antes de alterar:
+
+- Array compartilhado: `ocorrencias`.
+- Função que atualiza a lista: `renderizarOcorrencias()`.
+- Formulário: `id="formulario-ocorrencia"`.
+- Campos: `name="tipo"`, `name="bairro"` e `name="descricao"`, cada um com seu `<label>`.
+- Filtros: `id="filtro-tipo"`, `id="filtro-bairro"` e `id="filtro-status"`.
+- Área da lista: `id="lista-ocorrencias"`.
+- Mensagens de validação/sucesso: `id="mensagem-formulario"`, com `aria-live="polite"`.
+- Os indicadores já previstos em `impacto.html` usam `data-stat="total"`, `data-stat="resolved"`, `data-stat="resolved-rate"` e `data-stat="most-supported"`. Lucas deve preencher esses elementos.
+
+Scripts: carregar `js/dados.js` antes de `js/simulacao.js`; carregar `js/formulario.js` depois deles na página da solução. A página de impacto precisa carregar os dados e o código que calcula os indicadores. Manter também `js/script.js` se ele continuar sendo usado pelo comportamento compartilhado (por exemplo, o ano do rodapé). Usar `defer` nos scripts e confirmar que a ordem de execução respeita as dependências.
+
+OBSERVAÇÃO SOBRE O ESQUELETO ATUAL
+----------------------------------
+As páginas-base já existem, mas a seção de solução ainda é apenas um espaço reservado: os filtros, os campos do formulário, a lista e a área de mensagens precisam ser adicionados ao HTML com os IDs combinados. A página de equipe também precisa receber os RMs confirmados. Os indicadores já têm atributos `data-stat` no HTML.
+
+CHECKLIST FINAL
+---------------
+[ ] Há pelo menos 10 ocorrências iniciais no array e todas seguem o mesmo formato.
+[ ] Os filtros de tipo, bairro e status funcionam individualmente e combinados.
+[ ] Apoiar soma um voto, ordena a lista e atualiza a tela.
+[ ] Formulário mostra erros/sucesso sem `alert()` e adiciona uma ocorrência válida à lista.
+[ ] Indicadores são calculados a partir do array compartilhado.
+[ ] Quatro páginas têm o mesmo menu, estrutura semântica e links válidos.
+[ ] Layout testado em celular; teclado, foco, contraste, labels e textos alternativos conferidos.
+[ ] Nomes e RMs da equipe foram confirmados.
+[ ] Nenhum CSS inline ou biblioteca externa foi usado.
