@@ -7,6 +7,8 @@
   <title>CityFix | Solução</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
+  <script src="js/dados.js" defer></script>
+  <script src="js/simulacao.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -38,7 +40,32 @@
     <section class="content-section" aria-labelledby="report-title">
       <h2 id="report-title">Registrar ocorrência</h2>
       <p>O formulário e a lista de ocorrências serão implementados nesta seção.</p>
-      <!-- Estrutura reservada para o formulário e os filtros do protótipo. -->
+      <!-- Estrutura reservada para o formulário do protótipo. -->
+    </section>
+    <section class="content-section" aria-labelledby="ocorrencias-title">
+      <h2 id="ocorrencias-title">Ocorrências registradas</h2>
+      <p>Filtre por tipo, bairro e status. As mais apoiadas aparecem primeiro.</p>
+      <div class="filtros">
+        <div class="filtro-campo">
+          <label for="filtro-tipo">Tipo</label>
+          <select id="filtro-tipo"><option value="">Todos os tipos</option></select>
+        </div>
+        <div class="filtro-campo">
+          <label for="filtro-bairro">Bairro</label>
+          <select id="filtro-bairro"><option value="">Todos os bairros</option></select>
+        </div>
+        <div class="filtro-campo">
+          <label for="filtro-status">Status</label>
+          <select id="filtro-status"><option value="">Todos os status</option></select>
+        </div>
+        <button type="button" id="limpar-filtros" class="botao-secundario">Limpar filtros</button>
+      </div>
+      <p id="resumo-ocorrencias" aria-live="polite"></p>
+      <p id="mensagem-lista" class="mensagem-lista" aria-live="polite"></p>
+      <ul id="lista-ocorrencias" class="lista-ocorrencias"></ul>
+      <p class="nota-dados">Os dados ficam salvos neste navegador.
+        <button type="button" id="restaurar-dados" class="botao-secundario">Restaurar dados de exemplo</button>
+      </p>
     </section>
   </main>
   <footer class="site-footer">
