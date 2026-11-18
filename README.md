@@ -13,12 +13,17 @@ Buracos, calçadas quebradas, iluminação ruim e lixo acumulado afetam o cotidi
 
 ## Estrutura
 - `index.html` — página inicial e apresentação do problema e da proposta.
-- `solucao.html` — página da solução e espaço reservado para formulário e ocorrências.
-- `impacto.html` — página de indicadores e ODS.
+- `solucao.html` — formulário de registro, filtros e lista de ocorrências com o botão Apoiar.
+- `impacto.html` — indicadores calculados a partir das ocorrências e relação com os ODS.
 - `equipe.html` — integrantes do projeto.
 - `css/style.css` — estilos compartilhados, sem CSS inline.
-- `js/script.js` — JavaScript compartilhado.
+- `js/script.js` — JavaScript compartilhado (ano do rodapé).
+- `js/dados.js` — array `ocorrencias` (12 registros), listas de tipos, bairros e status, e gravação no `localStorage`.
+- `js/simulacao.js` — lista, filtros, apoios e indicadores (`renderizarOcorrencias()`).
+- `js/formulario.js` — validação do formulário e criação de novas ocorrências.
 - `img/` — imagens do projeto.
+
+Ordem dos scripts (todos com `defer`): `script.js`, `dados.js`, `simulacao.js` e, na página da solução, `formulario.js`.
 
 As quatro páginas usam HTML semântico (`header`, `nav`, `main` e `footer`) e compartilham o mesmo menu.
 
@@ -31,9 +36,12 @@ ODS 9 (Indústria, Inovação e Infraestrutura), ODS 10 (Redução das Desiguald
 - Lucas Nunes Nogueira — RM570205
 - João Victor Silva de Paula Cesar — RM573166
 
+## Créditos de imagem
+- `img/avenida-paulista.jpg`: Avenida Paulista, São Paulo. Foto de [Vitor Mendes Stafusa no Unsplash](https://unsplash.com/photos/a-city-street-filled-with-lots-of-traffic-next-to-tall-buildings-o3jiiES00cI), sob a Licença Unsplash.
+
 ## Ferramentas de inteligência artificial
 - **GitHub Copilot:** utilizado como ferramenta de apoio para criar a estrutura inicial das páginas HTML, o CSS compartilhado, o JavaScript inicial e a documentação do projeto. O conteúdo gerado foi revisado e alterado pela equipe.
-- **Claude:** utilizado no brainstorming, na decisão e organização dos elementos e na escolha do caminho do projeto no início do desenvolvimento.
+- **Claude:** utilizado no brainstorming, na decisão e organização dos elementos e na escolha do caminho do projeto no início do desenvolvimento. Também deu apoio no planejamento, na pesquisa, na escrita e nos testes da parte de dados e simulação (`js/dados.js` e `js/simulacao.js`) , na escrita do tema visual (bloco "Black Mirror clean" no fim de `css/style.css`) e na revisão de estilo dos textos das páginas, mantendo o conteúdo escrito pela equipe. O código e os textos foram revisados pelo integrante responsável.
   
 ## Executar
 Abra `index.html` em um navegador. O projeto é estático e não requer dependências nesta etapa.

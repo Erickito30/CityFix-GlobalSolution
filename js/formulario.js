@@ -1,16 +1,9 @@
 "use strict";
 
-// Formulário de registro de ocorrências (Pietro).
-// Depende de js/dados.js (array `ocorrencias`) e js/simulacao.js
-// (função `renderizarOcorrencias()`), que precisam carregar antes deste arquivo.
-// Todo o código fica dentro de uma função para não criar variáveis globais
-// que possam bater com os nomes usados nos outros scripts.
-
 function iniciarFormulario() {
   const formulario = document.getElementById("formulario-ocorrencia");
   const mensagem = document.getElementById("mensagem-formulario");
 
-  // Só roda na página que tem o formulário.
   if (!formulario || !mensagem) {
     return;
   }
@@ -18,8 +11,6 @@ function iniciarFormulario() {
   const MINIMO_DESCRICAO = 15;
   const MAXIMO_DESCRICAO = 300;
 
-  // Cada regra recebe o valor do campo e devolve o texto do erro,
-  // ou uma string vazia quando o valor está certo.
   const regras = {
     tipo: function (valor) {
       return valor === "" ? "Escolha o tipo do problema." : "";
@@ -56,7 +47,6 @@ function iniciarFormulario() {
     }
   }
 
-  // Valida todos os campos e devolve o primeiro campo com erro (ou null).
   function validarFormulario() {
     let primeiroCampoComErro = null;
 
@@ -79,8 +69,6 @@ function iniciarFormulario() {
     mensagem.className = "mensagem-formulario mensagem-" + tipo;
   }
 
-  // Próximo ID = maior ID que já existe + 1. Assim nunca repete,
-  // mesmo que o array não esteja em ordem.
   function gerarProximoId(lista) {
     let maiorId = 0;
 
@@ -104,13 +92,11 @@ function iniciarFormulario() {
       return;
     }
 
-    // `typeof` evita erro caso o dados.js não tenha carregado.
     if (typeof ocorrencias === "undefined" || !Array.isArray(ocorrencias)) {
       mostrarMensagem("Não foi possível registrar agora porque a lista de ocorrências não carregou.", "erro");
       return;
     }
 
-    // Mesmo formato dos objetos do array: { id, tipo, bairro, descricao, status, votos }
     const novaOcorrencia = {
       id: gerarProximoId(ocorrencias),
       tipo: formulario.elements.tipo.value,
@@ -134,7 +120,6 @@ function iniciarFormulario() {
     );
   });
 
-  // Quando a pessoa corrige um campo que estava com erro, o erro some na hora.
   function revalidarCampo(evento) {
     const campo = evento.target;
 
