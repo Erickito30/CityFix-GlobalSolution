@@ -13,7 +13,6 @@ const filtroStatus = document.getElementById("filtro-status");
 const botaoLimparFiltros = document.getElementById("limpar-filtros");
 const resumoOcorrencias = document.getElementById("resumo-ocorrencias");
 const mensagemLista = document.getElementById("mensagem-lista");
-const botaoRestaurar = document.getElementById("restaurar-dados");
 
 // ---------- Funções auxiliares ----------
 
@@ -243,17 +242,6 @@ if (botaoLimparFiltros) {
     renderizarOcorrencias();
     if (mensagemLista) {
       mensagemLista.textContent = "Filtros limpos. Mostrando todas as ocorrências.";
-    }
-  });
-}
-
-// Volta aos 12 exemplos iniciais (útil para testar e gravar o pitch).
-if (botaoRestaurar) {
-  botaoRestaurar.addEventListener("click", () => {
-    restaurarDadosExemplo();
-    renderizarOcorrencias();
-    if (mensagemLista) {
-      mensagemLista.textContent = "Dados de exemplo restaurados. Apoios e ocorrências novas foram apagados.";
     }
   });
 }

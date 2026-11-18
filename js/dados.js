@@ -126,9 +126,6 @@ const ocorrencias = [
 
 const CHAVE_ARMAZENAMENTO = "cityfix-ocorrencias";
 
-// Cópia dos dados de exemplo, usada pelo botão "Restaurar dados de exemplo".
-const OCORRENCIAS_EXEMPLO = JSON.parse(JSON.stringify(ocorrencias));
-
 // Confere se um objeto salvo tem o formato combinado.
 function ocorrenciaValida(item) {
   return item !== null &&
@@ -171,15 +168,6 @@ function carregarOcorrencias() {
     }
   } catch (erro) {
     // Dado salvo corrompido ou armazenamento indisponível: usa os dados de exemplo.
-  }
-}
-
-function restaurarDadosExemplo() {
-  substituirOcorrencias(JSON.parse(JSON.stringify(OCORRENCIAS_EXEMPLO)));
-  try {
-    localStorage.removeItem(CHAVE_ARMAZENAMENTO);
-  } catch (erro) {
-    // Sem armazenamento: só os dados em memória são restaurados.
   }
 }
 

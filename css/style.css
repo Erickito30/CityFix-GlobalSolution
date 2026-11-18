@@ -384,50 +384,95 @@ input:disabled, select:disabled, textarea:disabled { color: var(--color-muted); 
 .ods-item + .ods-item { margin-top: 1.25rem; }
 .ods-item h3 { margin: 0 0 .25rem; font-size: 1.1rem; }
 
+
 /* ==========================================================
-   Tema "Black Mirror" (Lucas) — por cima do visual do João.
-   Interface de sistema: escuro e frio, cantos retos, rótulos
-   em fonte monoespaçada e um único azul-ciano de "sinal".
-   Só redefine cores e detalhes; a estrutura acima continua.
+   Tema "Black Mirror clean" (Lucas) — por cima do visual do João.
+   Branco clínico, letras em azul, cantos retos, rótulos em
+   fonte monoespaçada e seções que ocupam a largura da página.
    ========================================================== */
 
 :root {
-  color-scheme: dark;
-  --color-ink: #e9eef3;
-  --color-muted: #9aa8b5;
-  --color-primary: #5ad8ff;
-  --color-primary-dark: #9ae6ff;
-  --color-primary-soft: rgb(90 216 255 / 10%);
-  --color-focus: #5ad8ff;
-  --color-surface: #11151a;
-  --color-background: #090b0e;
-  --color-border: #232c35;
+  color-scheme: light;
+  --color-ink: #0b2559;
+  --color-text: #20427a;
+  --color-muted: #4d6593;
+  --color-primary: #1747d6;
+  --color-primary-dark: #0b2559;
+  --color-primary-soft: #eaf0ff;
+  --color-focus: #1747d6;
+  --color-surface: #ffffff;
+  --color-background: #ffffff;
+  --color-tint: #f4f7fd;
+  --color-border: #dbe3f1;
   --shadow-card: none;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --page-gutter: max(1.25rem, calc((100% - 1080px) / 2));
 }
 
-body {
-  background:
-    radial-gradient(ellipse 70% 40% at 50% -10%, rgb(90 216 255 / 8%), transparent 70%),
-    var(--color-background);
-}
+body { color: var(--color-text); background: var(--color-background); }
+p { color: var(--color-text); }
+strong { color: var(--color-ink); }
+::selection { color: #fff; background: var(--color-primary); }
+a { color: var(--color-primary); }
 
-::selection { color: #000; background: var(--color-primary); }
+/* ---------- Cabeçalho ---------- */
 
-a { color: var(--color-primary-dark); }
-
-/* Cabeçalho: barra de sistema */
-.site-header { background: rgb(9 11 14 / 92%); }
+.site-header { border-bottom-color: var(--color-border); }
 .brand { color: var(--color-ink); font-family: var(--font-mono); font-weight: 700; letter-spacing: -.02em; }
+
 /* Cursor piscando depois do nome (sem texto, para leitores de tela não lerem) */
-.brand::after { display: inline-block; width: .55em; height: .14em; margin-left: .12em; content: ""; background: var(--color-primary); animation: piscar 1.1s steps(1) infinite; }
-.nav-list a { border-radius: 0; font-family: var(--font-mono); font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; }
-.nav-list a:hover, .nav-list a[aria-current="page"] { color: var(--color-ink); background: transparent; box-shadow: inset 0 -2px 0 var(--color-primary); }
+.brand::after {
+  display: inline-block;
+  width: .55em;
+  height: .14em;
+  margin-left: .12em;
+  content: "";
+  background: var(--color-primary);
+  animation: piscar 1.1s steps(1) infinite;
+}
 
 @keyframes piscar { 50% { opacity: 0; } }
 
-/* Títulos e rótulos */
-h1, h2 { color: #f5f8fb; letter-spacing: -.035em; }
+.nav-list a {
+  border-radius: 0;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.nav-list a:hover,
+.nav-list a[aria-current="page"] { color: var(--color-primary); background: transparent; box-shadow: inset 0 -2px 0 var(--color-primary); }
+
+/* ---------- Seções de ponta a ponta ---------- */
+
+main { width: 100%; max-width: none; }
+
+.page-heading,
+.content-section {
+  margin: 0;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--page-gutter);
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background: var(--color-surface);
+  box-shadow: none;
+}
+
+/* Alterna branco e azul bem claro para separar as seções */
+.content-section:nth-of-type(even) { background: var(--color-tint); }
+
+.page-heading { padding-top: clamp(3rem, 8vw, 5.5rem); }
+.page-heading p:last-child { max-width: 640px; }
+
+.site-footer { margin-top: 0; }
+
+/* ---------- Títulos e rótulos ---------- */
+
+h1, h2, h3 { color: var(--color-ink); }
+h1 { letter-spacing: -.045em; }
+
 .eyebrow,
 label,
 .campo label,
@@ -436,7 +481,8 @@ label,
 .ocorrencia-bairro,
 #resumo-ocorrencias,
 .fonte,
-.dica-campo {
+.dica-campo,
+.site-footer p {
   font-family: var(--font-mono);
   letter-spacing: .04em;
 }
@@ -444,25 +490,14 @@ label,
 .eyebrow { color: var(--color-primary); font-weight: 600; }
 .eyebrow::before { content: "> "; }
 label, .campo label, .filtro-campo label { color: var(--color-muted); font-size: .8rem; font-weight: 600; text-transform: uppercase; }
+.fonte, .dica-campo { color: var(--color-muted); }
 
-/* Cartões: vidro escuro, cantos retos */
-.content-section,
-.filtros,
-.ocorrencia-card,
-#lista-ocorrencias > *,
-.stat-card,
-.team-card,
-.dado-destaque {
-  border-radius: 2px;
-}
+/* ---------- Botões ---------- */
 
-.content-section { background: linear-gradient(180deg, #12171d, #0e1216); }
-
-/* Botões: branco gelado, sinal ciano no hover */
 .button,
 button {
-  border-radius: 2px;
-  color: #050607;
+  border-radius: 0;
+  color: #ffffff;
   background: var(--color-ink);
   font-family: var(--font-mono);
   font-size: .85rem;
@@ -471,130 +506,122 @@ button {
 }
 
 .button:hover,
-button:hover { color: #050607; background: var(--color-primary); }
+button:hover { color: #ffffff; background: var(--color-primary); }
 
-.botao-secundario { color: var(--color-ink); background: transparent; border-color: var(--color-border); }
-.botao-secundario:hover { color: #050607; background: var(--color-primary); border-color: var(--color-primary); }
+.botao-secundario { color: var(--color-ink); background: #ffffff; border-color: var(--color-ink); }
+.botao-secundario:hover { color: #ffffff; background: var(--color-primary); border-color: var(--color-primary); }
 .botao-apoiar:hover { background: var(--color-primary); }
 
-/* Campos */
+/* ---------- Campos e mensagens ---------- */
+
 input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea,
 .campo select,
 .campo textarea {
   color: var(--color-ink);
-  background: #07090b;
-  border: 1px solid #34404b;
-  border-radius: 2px;
+  background: #ffffff;
+  border: 1px solid #a9b8d3;
+  border-radius: 0;
 }
 
-select option { color: var(--color-ink); background: var(--color-surface); }
-input:hover, select:hover, textarea:hover { border-color: var(--color-muted); }
+input:hover, select:hover, textarea:hover { border-color: var(--color-primary); }
 .campo select:focus-visible, .campo textarea:focus-visible { outline-color: var(--color-focus); }
-.campo [aria-invalid="true"] { border: 2px solid #ff6b6b; }
-.erro-campo { color: #ff9a9a; }
 
-/* Mensagens */
+.filtros { border-radius: 0; background: #ffffff; }
+.content-section:nth-of-type(odd) .filtros { background: var(--color-tint); }
+
 #mensagem-formulario,
-.mensagem-lista { border-radius: 2px; font-family: var(--font-mono); font-size: .9rem; }
-.mensagem-lista { color: var(--color-primary-dark); background: var(--color-primary-soft); }
-.mensagem-sucesso { color: #a7f3c4; background: rgb(60 200 120 / 10%); border: 1px solid rgb(60 200 120 / 45%); border-left-width: .25rem; }
-.mensagem-erro { color: #ffb3b3; background: rgb(255 90 90 / 10%); border: 1px solid rgb(255 90 90 / 45%); border-left-width: .25rem; }
+.mensagem-lista { border-radius: 0; font-family: var(--font-mono); font-size: .9rem; }
+.mensagem-lista { color: var(--color-ink); background: var(--color-primary-soft); border-left-color: var(--color-primary); }
 
-/* Ocorrências: cara de painel de monitoramento */
+/* ---------- Ocorrências ---------- */
+
 .ocorrencia-card,
-#lista-ocorrencias > * { background: #0d1115; transition: border-color .2s ease; }
-.ocorrencia-card:hover { border-color: var(--color-primary); }
-.ocorrencia-card:first-child { border-color: rgb(90 216 255 / 55%); }
-.ocorrencia-bairro { color: var(--color-primary-dark); font-size: .8rem; font-weight: 600; text-transform: uppercase; }
-.ocorrencia-votos { font-family: var(--font-mono); font-size: 1.1rem; }
+#lista-ocorrencias > * { border-radius: 0; background: #ffffff; transition: border-color .2s ease, box-shadow .2s ease; }
+.ocorrencia-card:hover { border-color: var(--color-primary); box-shadow: 0 .5rem 1.5rem rgb(23 71 214 / 10%); }
+.ocorrencia-card:first-child { border-top: 3px solid var(--color-primary); }
+.ocorrencia-bairro { color: var(--color-primary); font-size: .8rem; font-weight: 600; text-transform: uppercase; }
+.ocorrencia-votos { color: var(--color-ink); font-family: var(--font-mono); font-size: 1.1rem; }
 .ocorrencia-rodape { border-top: 1px solid var(--color-border); }
 
-.status-selo { border-radius: 2px; font-family: var(--font-mono); letter-spacing: .06em; text-transform: uppercase; border: 1px solid currentColor; }
+.status-selo { border-radius: 0; font-family: var(--font-mono); letter-spacing: .06em; text-transform: uppercase; border: 1px solid currentColor; background: #ffffff; }
 .status-selo::before { content: "● "; }
-.status-aberta { color: #ff8f8f; background: rgb(255 90 90 / 10%); }
-.status-em-analise { color: #ffd479; background: rgb(255 200 80 / 10%); }
-.status-resolvida { color: #8ff0b4; background: rgb(60 200 120 / 10%); }
 
-/* Indicadores e dado do IBGE em fonte de sistema */
-.stat-card { border-top: 2px solid var(--color-primary); background: #0d1115; }
+/* ---------- Indicadores, dado do IBGE e equipe ---------- */
+
+.stat-card { border-radius: 0; border-top: 3px solid var(--color-primary); background: #ffffff; }
+.stat-card dt { color: var(--color-muted); }
 .stat-card dd,
-.dado-destaque strong { color: #f5f8fb; font-family: var(--font-mono); font-weight: 700; letter-spacing: -.03em; }
+.dado-destaque strong { color: var(--color-ink); font-family: var(--font-mono); font-weight: 700; letter-spacing: -.03em; }
 .stat-card dd[data-stat="most-supported"] { font-size: 1.05rem; }
-.dado-destaque { color: var(--color-ink); background: #0d1115; border-left-color: var(--color-primary); }
+.dado-destaque { border-radius: 0; color: var(--color-text); background: var(--color-tint); border-left-color: var(--color-primary); }
 
-.team-card { background: #0d1115; }
-.team-card__rm { font-family: var(--font-mono); color: var(--color-primary-dark); }
+.team-card { border-radius: 0; background: #ffffff; }
+.team-card__rm { color: var(--color-primary); font-family: var(--font-mono); }
 
-.site-footer { background: var(--color-background); }
-.site-footer p { font-family: var(--font-mono); font-size: .8rem; color: var(--color-muted); }
+.site-footer p { color: var(--color-muted); font-size: .8rem; }
 
-/* ---------- Hero com a foto ---------- */
+/* ---------- Hero: foto ocupando o container inteiro ---------- */
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  display: flex;
   align-items: center;
-  gap: clamp(1.5rem, 5vw, 4rem);
-  border: 1px solid var(--color-border);
-  border-radius: 2px;
-  background: linear-gradient(135deg, #10151b 0%, #07090b 100%);
+  min-height: min(82vh, 760px);
+  margin: 0;
+  padding: clamp(3rem, 8vw, 6rem) var(--page-gutter);
+  border-radius: 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-ink);
+  background: #ffffff;
   box-shadow: none;
 }
 
 .hero::after { display: none; }
-.hero h1 { color: #f5f8fb; }
-.hero p { color: var(--color-muted); }
+
+.hero-texto { position: relative; z-index: 2; max-width: 560px; }
+.hero h1 { color: var(--color-ink); }
+.hero p { color: var(--color-text); }
 .hero .eyebrow { color: var(--color-primary); }
-.hero .button { color: #050607; background: var(--color-ink); }
+.hero .button { color: #ffffff; background: var(--color-ink); }
 .hero .button:hover { background: var(--color-primary); }
 
-.hero-foto { margin: 0; }
-
-/* A foto aparece como a tela de uma câmera de monitoramento */
-.hero-foto-tela {
-  position: relative;
-  overflow: hidden;
-  max-width: 340px;
-  margin-left: auto;
-  border: 1px solid #34404b;
-  background: #000;
-  aspect-ratio: 9 / 14;
-}
+/* A foto vira o fundo do hero */
+.hero-foto { position: absolute; z-index: 0; inset: 0; margin: 0; }
+.hero-foto-tela { position: absolute; inset: 0; overflow: hidden; }
 
 .hero-foto-tela img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 60%;
-  filter: grayscale(.85) contrast(1.15) brightness(.8);
+  object-position: center 62%;
+  filter: grayscale(.55) contrast(1.05) brightness(1.05) hue-rotate(-8deg);
 }
 
-/* Linhas de varredura e tom frio por cima da foto */
+/* Véu branco da esquerda para a direita: o texto fica sobre o branco, a foto aparece à direita */
 .hero-foto-tela::before {
   position: absolute;
   z-index: 1;
   inset: 0;
   content: "";
   background:
-    repeating-linear-gradient(0deg, rgb(0 0 0 / 22%) 0 1px, transparent 1px 3px),
-    linear-gradient(180deg, rgb(90 216 255 / 12%), rgb(0 0 0 / 35%));
+    linear-gradient(90deg, #ffffff 0%, rgb(255 255 255 / 96%) 34%, rgb(255 255 255 / 55%) 52%, rgb(255 255 255 / 0%) 72%),
+    linear-gradient(0deg, rgb(23 71 214 / 12%), rgb(23 71 214 / 0%) 40%);
   pointer-events: none;
 }
 
-/* Faixa de varredura que desce pela imagem */
+/* Linha de varredura azul que desce pela foto */
 .hero-foto-tela::after {
   position: absolute;
-  z-index: 2;
-  left: 0;
+  z-index: 1;
+  left: 45%;
   right: 0;
-  top: -20%;
-  height: 20%;
+  top: -15%;
+  height: 15%;
   content: "";
-  background: linear-gradient(180deg, transparent, rgb(90 216 255 / 14%), transparent);
-  animation: varredura 5s linear infinite;
+  background: linear-gradient(180deg, transparent, rgb(23 71 214 / 18%), transparent);
+  animation: varredura 6s linear infinite;
   pointer-events: none;
 }
 
@@ -602,32 +629,41 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-muted); }
 
 .hud {
   position: absolute;
-  z-index: 3;
-  left: .75rem;
-  right: .75rem;
-  color: #e9eef3;
-  font-family: var(--font-mono);
-  font-size: .7rem;
-  letter-spacing: .08em;
-  text-shadow: 0 1px 2px #000;
-}
-
-.hud-topo { top: .65rem; }
-.hud-topo::first-letter { color: #ff5c5c; }
-.hud-base { bottom: .65rem; padding: .3rem .5rem; color: #050607; background: var(--color-primary); width: max-content; max-width: calc(100% - 1.5rem); }
-
-.hero-foto figcaption {
-  max-width: 340px;
-  margin: .6rem 0 0 auto;
-  color: var(--color-muted);
+  z-index: 2;
+  right: var(--page-gutter);
+  padding: .3rem .55rem;
   font-family: var(--font-mono);
   font-size: .72rem;
+  letter-spacing: .08em;
 }
 
-.hero-foto figcaption a { color: var(--color-muted); }
+.hud-topo { top: 1.25rem; color: var(--color-ink); background: rgb(255 255 255 / 88%); }
+.hud-topo::first-letter { color: #d6243a; }
+.hud-base { bottom: 3rem; color: #ffffff; background: var(--color-primary); }
 
+.hero-foto figcaption {
+  position: absolute;
+  z-index: 2;
+  right: var(--page-gutter);
+  bottom: .9rem;
+  padding: .15rem .45rem;
+  color: var(--color-ink);
+  background: rgb(255 255 255 / 85%);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+}
+
+.hero-foto figcaption a { color: var(--color-ink); }
+
+/* Celular: a foto fica em cima e o véu branco sobe de baixo */
 @media (max-width: 760px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-foto-tela { max-width: none; margin: 0; aspect-ratio: 4 / 3; }
-  .hero-foto figcaption { max-width: none; margin-left: 0; }
+  .hero { align-items: flex-end; min-height: 0; padding-top: 19rem; padding-bottom: 3.5rem; }
+  .hero-foto-tela img { object-position: center 70%; }
+  .hero-foto-tela::before {
+    background: linear-gradient(0deg, #ffffff 0%, rgb(255 255 255 / 97%) 48%, rgb(255 255 255 / 40%) 66%, rgb(255 255 255 / 0%) 80%);
+  }
+  .hero-foto-tela::after { left: 0; }
+  .hud-topo { top: 1rem; }
+  .hud-base { top: 3.2rem; bottom: auto; }
+  .hero-foto figcaption { top: 14.5rem; bottom: auto; }
 }
