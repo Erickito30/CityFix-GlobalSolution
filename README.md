@@ -31,9 +31,12 @@ ODS 9 (Indústria, Inovação e Infraestrutura), ODS 10 (Redução das Desiguald
 - Lucas Nunes Nogueira — RM570205
 - João Victor Silva de Paula Cesar — RM573166
 
+## Créditos de imagem
+- `img/avenida-paulista.jpg`: Avenida Paulista, São Paulo. Foto de [Vitor Mendes Stafusa no Unsplash](https://unsplash.com/photos/a-city-street-filled-with-lots-of-traffic-next-to-tall-buildings-o3jiiES00cI), sob a Licença Unsplash.
+
 ## Ferramentas de inteligência artificial
 - **GitHub Copilot:** utilizado como ferramenta de apoio para criar a estrutura inicial das páginas HTML, o CSS compartilhado, o JavaScript inicial e a documentação do projeto. O conteúdo gerado foi revisado e alterado pela equipe.
-- **Claude:** utilizado no brainstorming, na decisão e organização dos elementos e na escolha do caminho do projeto no início do desenvolvimento. Também deu apoio no planejamento, na pesquisa, na escrita e nos testes da parte de dados e simulação (`js/dados.js` e `js/simulacao.js`). O código foi revisado pelo integrante responsável.
+- **Claude:** utilizado no brainstorming, na decisão e organização dos elementos e na escolha do caminho do projeto no início do desenvolvimento. Também deu apoio no planejamento, na pesquisa, na escrita e nos testes da parte de dados e simulação (`js/dados.js` e `js/simulacao.js`) e na escrita do tema visual escuro (bloco "Black Mirror" no fim de `css/style.css`). O código foi revisado pelo integrante responsável.
   
 ## Executar
 Abra `index.html` em um navegador. O projeto é estático e não requer dependências nesta etapa.
