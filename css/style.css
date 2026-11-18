@@ -359,7 +359,6 @@ input:disabled, select:disabled, textarea:disabled { color: var(--color-muted); 
   }
 }
 
-/* Formulário de ocorrência (Pietro). João, pode ajustar à vontade. */
 .form-ocorrencia { display: grid; gap: 1.1rem; max-width: 560px; }
 .campo { display: flex; flex-direction: column; gap: .35rem; }
 .campo label { font-weight: 700; }
@@ -375,7 +374,6 @@ input:disabled, select:disabled, textarea:disabled { color: var(--color-muted); 
 .mensagem-sucesso { color: #14532d; background: #e5f4ea; border: 1px solid #9fd3b0; }
 .mensagem-erro { color: #8c1d18; background: #fbeaea; border: 1px solid #efb5b1; }
 
-/* Textos da página inicial e de impacto (Pietro). */
 .dado-destaque { margin: 1.25rem 0 .5rem; padding: 1rem 1.25rem; color: var(--color-ink); background: var(--color-background); border-left: 4px solid var(--color-primary); border-radius: .5rem; }
 .dado-destaque strong { display: block; color: var(--color-primary-dark); font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; }
 .fonte { font-size: .85rem; }
@@ -383,13 +381,6 @@ input:disabled, select:disabled, textarea:disabled { color: var(--color-muted); 
 .ods-itens li { margin: .35rem 0; }
 .ods-item + .ods-item { margin-top: 1.25rem; }
 .ods-item h3 { margin: 0 0 .25rem; font-size: 1.1rem; }
-
-
-/* ==========================================================
-   Tema "Black Mirror clean" (Lucas) — por cima do visual do João.
-   Branco clínico, letras em azul, cantos retos, rótulos em
-   fonte monoespaçada e seções que ocupam a largura da página.
-   ========================================================== */
 
 :root {
   color-scheme: light;
@@ -415,12 +406,9 @@ strong { color: var(--color-ink); }
 ::selection { color: #fff; background: var(--color-primary); }
 a { color: var(--color-primary); }
 
-/* ---------- Cabeçalho ---------- */
-
 .site-header { border-bottom-color: var(--color-border); }
 .brand { color: var(--color-ink); font-family: var(--font-mono); font-weight: 700; letter-spacing: -.02em; }
 
-/* Cursor piscando depois do nome (sem texto, para leitores de tela não lerem) */
 .brand::after {
   display: inline-block;
   width: .55em;
@@ -445,8 +433,6 @@ a { color: var(--color-primary); }
 .nav-list a:hover,
 .nav-list a[aria-current="page"] { color: var(--color-primary); background: transparent; box-shadow: inset 0 -2px 0 var(--color-primary); }
 
-/* ---------- Seções de ponta a ponta ---------- */
-
 main { width: 100%; max-width: none; }
 
 .page-heading,
@@ -460,15 +446,12 @@ main { width: 100%; max-width: none; }
   box-shadow: none;
 }
 
-/* Alterna branco e azul bem claro para separar as seções */
 .content-section:nth-of-type(even) { background: var(--color-tint); }
 
 .page-heading { padding-top: clamp(3rem, 8vw, 5.5rem); }
 .page-heading p:last-child { max-width: 640px; }
 
 .site-footer { margin-top: 0; }
-
-/* ---------- Títulos e rótulos ---------- */
 
 h1, h2, h3 { color: var(--color-ink); }
 h1 { letter-spacing: -.045em; }
@@ -492,8 +475,6 @@ label,
 label, .campo label, .filtro-campo label { color: var(--color-muted); font-size: .8rem; font-weight: 600; text-transform: uppercase; }
 .fonte, .dica-campo { color: var(--color-muted); }
 
-/* ---------- Botões ---------- */
-
 .button,
 button {
   border-radius: 0;
@@ -511,8 +492,6 @@ button:hover { color: #ffffff; background: var(--color-primary); }
 .botao-secundario { color: var(--color-ink); background: #ffffff; border-color: var(--color-ink); }
 .botao-secundario:hover { color: #ffffff; background: var(--color-primary); border-color: var(--color-primary); }
 .botao-apoiar:hover { background: var(--color-primary); }
-
-/* ---------- Campos e mensagens ---------- */
 
 input:not([type="checkbox"]):not([type="radio"]),
 select,
@@ -535,8 +514,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
 .mensagem-lista { border-radius: 0; font-family: var(--font-mono); font-size: .9rem; }
 .mensagem-lista { color: var(--color-ink); background: var(--color-primary-soft); border-left-color: var(--color-primary); }
 
-/* ---------- Ocorrências ---------- */
-
 .ocorrencia-card,
 #lista-ocorrencias > * { border-radius: 0; background: #ffffff; transition: border-color .2s ease, box-shadow .2s ease; }
 .ocorrencia-card:hover { border-color: var(--color-primary); box-shadow: 0 .5rem 1.5rem rgb(23 71 214 / 10%); }
@@ -547,8 +524,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
 
 .status-selo { border-radius: 0; font-family: var(--font-mono); letter-spacing: .06em; text-transform: uppercase; border: 1px solid currentColor; background: #ffffff; }
 .status-selo::before { content: "● "; }
-
-/* ---------- Indicadores, dado do IBGE e equipe ---------- */
 
 .stat-card { border-radius: 0; border-top: 3px solid var(--color-primary); background: #ffffff; }
 .stat-card dt { color: var(--color-muted); }
@@ -561,8 +536,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
 .team-card__rm { color: var(--color-primary); font-family: var(--font-mono); }
 
 .site-footer p { color: var(--color-muted); font-size: .8rem; }
-
-/* ---------- Hero: foto ocupando o container inteiro ---------- */
 
 .hero {
   display: flex;
@@ -586,7 +559,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
 .hero .button { color: #ffffff; background: var(--color-ink); }
 .hero .button:hover { background: var(--color-primary); }
 
-/* A foto vira o fundo do hero */
 .hero-foto { position: absolute; z-index: 0; inset: 0; margin: 0; }
 .hero-foto-tela { position: absolute; inset: 0; overflow: hidden; }
 
@@ -599,7 +571,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
   filter: grayscale(.55) contrast(1.05) brightness(1.05) hue-rotate(-8deg);
 }
 
-/* Véu branco da esquerda para a direita: o texto fica sobre o branco, a foto aparece à direita */
 .hero-foto-tela::before {
   position: absolute;
   z-index: 1;
@@ -611,7 +582,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
   pointer-events: none;
 }
 
-/* Linha de varredura azul que desce pela foto */
 .hero-foto-tela::after {
   position: absolute;
   z-index: 1;
@@ -656,7 +626,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
 
 .hero-foto figcaption a { color: var(--color-ink); }
 
-/* Celular: a foto fica em cima e o véu branco sobe de baixo */
 @media (max-width: 760px) {
   .hero { align-items: flex-end; min-height: 0; padding-top: 19rem; padding-bottom: 3.5rem; }
   .hero-foto-tela img { object-position: center 70%; }
