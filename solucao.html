@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Registre, consulte e apoie ocorrências urbanas com o CityFix.">
+  <meta name="description" content="Registre um problema, filtre as ocorrências do seu bairro e apoie as que também afetam você.">
   <title>CityFix | Solução</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
@@ -27,21 +27,21 @@
   <main>
     <section class="page-heading">
       <p class="eyebrow">Como funciona</p>
-      <h1>A solução CityFix</h1>
-      <p>Registre um problema, encontre ocorrências do seu bairro e apoie as que também afetam você.</p>
+      <h1>Do aviso ao reparo, em quatro passos.</h1>
+      <p>Registre um problema, encontre as ocorrências do seu bairro e apoie as que também afetam você. Cada apoio é um sinal de que o problema não é só seu.</p>
     </section>
     <section class="content-section" aria-labelledby="steps-title">
-      <h2 id="steps-title">Quatro passos</h2>
+      <h2 id="steps-title">Quatro passos, um ciclo completo</h2>
       <ol class="steps-list">
-        <li><strong>Registrar:</strong> informe o tipo de problema, o bairro e uma descrição.</li>
-        <li><strong>Ver:</strong> consulte as ocorrências com filtros por tipo, bairro e status.</li>
-        <li><strong>Apoiar:</strong> apoie os problemas que também afetam você.</li>
-        <li><strong>Acompanhar:</strong> veja se a ocorrência está aberta, em análise ou resolvida.</li>
+        <li><strong>Registrar:</strong> informe o tipo de problema, o bairro e o que está acontecendo.</li>
+        <li><strong>Ver:</strong> consulte as ocorrências e filtre por tipo, bairro e status.</li>
+        <li><strong>Apoiar:</strong> apoie os problemas que também afetam você e ajude a mostrar o que é prioridade.</li>
+        <li><strong>Acompanhar:</strong> siga cada ocorrência até o fim: aberta, em análise ou resolvida.</li>
       </ol>
     </section>
     <section class="content-section" aria-labelledby="report-title">
       <h2 id="report-title">Registrar ocorrência</h2>
-      <p>Preencha os três campos. A ocorrência entra na lista com o status Aberta e 0 apoios.</p>
+      <p>Preencha os três campos abaixo. A sua ocorrência entra na lista com o status Aberta e 0 apoios e, a partir daí, ganha força a cada apoio que receber.</p>
       <form id="formulario-ocorrencia" class="form-ocorrencia" novalidate>
         <div class="campo">
           <label for="campo-tipo">Tipo do problema</label>
@@ -70,7 +70,7 @@
         <div class="campo">
           <label for="campo-descricao">Descrição</label>
           <textarea id="campo-descricao" name="descricao" rows="4" maxlength="300" required aria-describedby="dica-descricao erro-descricao"></textarea>
-          <p class="dica-campo" id="dica-descricao">De 15 a 300 caracteres. Diga onde fica e o que está acontecendo.</p>
+          <p class="dica-campo" id="dica-descricao">De 15 a 300 caracteres. Conte onde fica e o que está acontecendo.</p>
           <p class="erro-campo" id="erro-descricao" hidden></p>
         </div>
         <button type="submit" class="button">Registrar ocorrência</button>
@@ -79,7 +79,7 @@
     </section>
     <section class="content-section" aria-labelledby="ocorrencias-title">
       <h2 id="ocorrencias-title">Ocorrências registradas</h2>
-      <p>Filtre por tipo, bairro e status. As mais apoiadas aparecem primeiro.</p>
+      <p>Filtre por tipo, bairro e status. As mais apoiadas aparecem primeiro: é o próprio bairro dizendo o que precisa ser resolvido antes.</p>
       <div class="filtros">
         <div class="filtro-campo">
           <label for="filtro-tipo">Tipo</label>
