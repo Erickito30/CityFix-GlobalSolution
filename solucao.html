@@ -7,8 +7,10 @@
   <title>CityFix | Solução</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
+  <!-- Ordem importa: dados.js cria o array, simulacao.js cria renderizarOcorrencias(), formulario.js usa os dois. -->
   <script src="js/dados.js" defer></script>
   <script src="js/simulacao.js" defer></script>
+  <script src="js/formulario.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -39,8 +41,41 @@
     </section>
     <section class="content-section" aria-labelledby="report-title">
       <h2 id="report-title">Registrar ocorrência</h2>
-      <p>O formulário e a lista de ocorrências serão implementados nesta seção.</p>
-      <!-- Estrutura reservada para o formulário do protótipo. -->
+      <p>Preencha os três campos. A ocorrência entra na lista com o status Aberta e 0 apoios.</p>
+      <form id="formulario-ocorrencia" class="form-ocorrencia" novalidate>
+        <div class="campo">
+          <label for="campo-tipo">Tipo do problema</label>
+          <select id="campo-tipo" name="tipo" required aria-describedby="erro-tipo">
+            <option value="">Selecione o tipo</option>
+            <option value="Buraco na rua">Buraco na rua</option>
+            <option value="Calçada quebrada">Calçada quebrada</option>
+            <option value="Falta de rampa">Falta de rampa</option>
+            <option value="Iluminação">Iluminação</option>
+            <option value="Lixo acumulado">Lixo acumulado</option>
+          </select>
+          <p class="erro-campo" id="erro-tipo" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="campo-bairro">Bairro</label>
+          <select id="campo-bairro" name="bairro" required aria-describedby="erro-bairro">
+            <option value="">Selecione o bairro</option>
+            <option value="Centro">Centro</option>
+            <option value="Mooca">Mooca</option>
+            <option value="Pinheiros">Pinheiros</option>
+            <option value="Saúde">Saúde</option>
+            <option value="Vila Mariana">Vila Mariana</option>
+          </select>
+          <p class="erro-campo" id="erro-bairro" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="campo-descricao">Descrição</label>
+          <textarea id="campo-descricao" name="descricao" rows="4" maxlength="300" required aria-describedby="dica-descricao erro-descricao"></textarea>
+          <p class="dica-campo" id="dica-descricao">De 15 a 300 caracteres. Diga onde fica e o que está acontecendo.</p>
+          <p class="erro-campo" id="erro-descricao" hidden></p>
+        </div>
+        <button type="submit" class="button">Registrar ocorrência</button>
+      </form>
+      <p id="mensagem-formulario" class="mensagem-formulario" aria-live="polite"></p>
     </section>
     <section class="content-section" aria-labelledby="ocorrencias-title">
       <h2 id="ocorrencias-title">Ocorrências registradas</h2>

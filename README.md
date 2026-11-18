@@ -26,14 +26,14 @@ As quatro páginas usam HTML semântico (`header`, `nav`, `main` e `footer`) e c
 ODS 9 (Indústria, Inovação e Infraestrutura), ODS 10 (Redução das Desigualdades) e ODS 11 (Cidades e Comunidades Sustentáveis).
 
 ## Equipe
-- Erickito30 — Erick
-- iDroxz777 — Pietro
-- nuneslucas23 — Lucas
-- Joaovictor23-coder — João
+- Erick Henrique Miranda Izidoro — RM573024
+- Pietro de Nadai Fernandes de Andrade — RM569595
+- Lucas Nunes Nogueira — RM570205
+- João Victor Silva de Paula Cesar — RM573166
 
 ## Ferramentas de inteligência artificial
-- **GitHub Copilot:** utilizado como ferramenta de apoio para criar a estrutura inicial das páginas HTML, o CSS compartilhado, o JavaScript inicial e a documentação do projeto. O conteúdo gerado foi revisado, alterado pela equipe.
-- Claude - Utilizado como ferramenta de Brainstorming para, decisão e organizaçâo dos elementos e também, para qual caminho o projeto decidiria caminhar para o Início do desenvolvimento do mesmo.
+- **GitHub Copilot:** utilizado como ferramenta de apoio para criar a estrutura inicial das páginas HTML, o CSS compartilhado, o JavaScript inicial e a documentação do projeto. O conteúdo gerado foi revisado e alterado pela equipe.
+- **Claude:** utilizado no brainstorming, na decisão e organização dos elementos e na escolha do caminho do projeto no início do desenvolvimento.
   
 ## Executar
 Abra `index.html` em um navegador. O projeto é estático e não requer dependências nesta etapa.

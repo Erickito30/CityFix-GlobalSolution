@@ -6,22 +6,25 @@
 // As mudanças são salvas no localStorage por renderizarOcorrencias().
 // Formato de cada objeto: { id, tipo, bairro, descricao, status, votos }
 
-// Valores usados nos campos "tipo" e "status". Reutilize estas listas
-// no formulário e nos filtros para manter os valores consistentes.
+// Valores usados nos campos "tipo", "bairro" e "status". Precisam ser
+// iguais às opções do formulário em solucao.html (js/formulario.js).
 const TIPOS_OCORRENCIA = [
-  "Buraco na via",
-  "Calçada danificada",
-  "Iluminação pública",
-  "Lixo acumulado",
-  "Sinalização"
+  "Buraco na rua",
+  "Calçada quebrada",
+  "Falta de rampa",
+  "Iluminação",
+  "Lixo acumulado"
 ];
+
+// Bairros atendidos pelo protótipo (os mesmos do formulário).
+const BAIRROS_OCORRENCIA = ["Centro", "Mooca", "Pinheiros", "Saúde", "Vila Mariana"];
 
 const STATUS_OCORRENCIA = ["Aberta", "Em análise", "Resolvida"];
 
 const ocorrencias = [
   {
     id: 1,
-    tipo: "Buraco na via",
+    tipo: "Buraco na rua",
     bairro: "Mooca",
     descricao: "Buraco grande na Rua da Mooca, perto do ponto de ônibus. Carros desviam para a contramão.",
     status: "Aberta",
@@ -29,47 +32,47 @@ const ocorrencias = [
   },
   {
     id: 2,
-    tipo: "Iluminação pública",
-    bairro: "Capão Redondo",
+    tipo: "Iluminação",
+    bairro: "Saúde",
     descricao: "Três postes apagados na mesma quadra. A rua fica escura no caminho de volta da escola.",
     status: "Em análise",
     votos: 37
   },
   {
     id: 3,
-    tipo: "Calçada danificada",
+    tipo: "Falta de rampa",
     bairro: "Centro",
-    descricao: "Calçada quebrada e sem rampa na esquina. Cadeirantes precisam descer para a rua.",
+    descricao: "Esquina movimentada sem rampa. Cadeirantes precisam descer para a rua para atravessar.",
     status: "Aberta",
     votos: 29
   },
   {
     id: 4,
     tipo: "Lixo acumulado",
-    bairro: "Capão Redondo",
+    bairro: "Vila Mariana",
     descricao: "Entulho e lixo acumulados em terreno baldio há mais de um mês, com mau cheiro e ratos.",
     status: "Aberta",
     votos: 26
   },
   {
     id: 5,
-    tipo: "Sinalização",
+    tipo: "Calçada quebrada",
     bairro: "Pinheiros",
-    descricao: "Faixa de pedestres apagada em frente à escola estadual.",
+    descricao: "Calçada afundada em frente à escola estadual, com poças quando chove.",
     status: "Resolvida",
     votos: 22
   },
   {
     id: 6,
-    tipo: "Buraco na via",
-    bairro: "Itaquera",
+    tipo: "Buraco na rua",
+    bairro: "Saúde",
     descricao: "Cratera aberta depois da chuva na avenida principal do bairro.",
     status: "Em análise",
     votos: 19
   },
   {
     id: 7,
-    tipo: "Iluminação pública",
+    tipo: "Iluminação",
     bairro: "Mooca",
     descricao: "Poste piscando a noite toda na praça, deixando a área insegura.",
     status: "Resolvida",
@@ -77,8 +80,8 @@ const ocorrencias = [
   },
   {
     id: 8,
-    tipo: "Calçada danificada",
-    bairro: "Itaquera",
+    tipo: "Calçada quebrada",
+    bairro: "Vila Mariana",
     descricao: "Raiz de árvore levantou a calçada. Idosos já tropeçaram no local.",
     status: "Aberta",
     votos: 12
@@ -93,15 +96,15 @@ const ocorrencias = [
   },
   {
     id: 10,
-    tipo: "Sinalização",
-    bairro: "Capão Redondo",
-    descricao: "Placa de PARE derrubada no cruzamento, motoristas não param.",
+    tipo: "Falta de rampa",
+    bairro: "Saúde",
+    descricao: "Rampa de acesso ao posto de saúde quebrada, sem como subir de cadeira de rodas.",
     status: "Em análise",
     votos: 7
   },
   {
     id: 11,
-    tipo: "Buraco na via",
+    tipo: "Buraco na rua",
     bairro: "Pinheiros",
     descricao: "Buraco na ciclofaixa, ciclistas precisam ir para a pista dos carros.",
     status: "Resolvida",
@@ -109,7 +112,7 @@ const ocorrencias = [
   },
   {
     id: 12,
-    tipo: "Iluminação pública",
+    tipo: "Iluminação",
     bairro: "Centro",
     descricao: "Túnel de pedestres sem nenhuma lâmpada funcionando.",
     status: "Aberta",
@@ -131,8 +134,8 @@ function ocorrenciaValida(item) {
   return item !== null &&
     typeof item === "object" &&
     typeof item.id === "number" &&
-    typeof item.tipo === "string" &&
-    typeof item.bairro === "string" &&
+    TIPOS_OCORRENCIA.includes(item.tipo) &&
+    BAIRROS_OCORRENCIA.includes(item.bairro) &&
     typeof item.descricao === "string" &&
     STATUS_OCORRENCIA.includes(item.status) &&
     typeof item.votos === "number";
