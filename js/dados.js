@@ -3,11 +3,12 @@
 // Dados simulados do protótipo CityFix (não são ocorrências reais).
 // Fonte única de dados: a lista (solucao.html), o formulário e os
 // indicadores (impacto.html) leem e alteram este mesmo array.
-// As mudanças são salvas no localStorage por renderizarOcorrencias().
+// As mudanças são salvas no localStorage por renderizarOcorrencias()
+// (só quando algo mudou: um apoio ou uma ocorrência nova).
 // Formato de cada objeto: { id, tipo, bairro, descricao, status, votos }
 
-// Valores usados nos campos "tipo", "bairro" e "status". Precisam ser
-// iguais às opções do formulário em solucao.html (js/formulario.js).
+// Lista única de tipos, bairros e status. O formulário e os filtros de
+// solucao.html são preenchidos a partir dela por simulacao.js.
 const TIPOS_OCORRENCIA = [
   "Buraco na rua",
   "Calçada quebrada",
@@ -126,16 +127,44 @@ const ocorrencias = [
 
 const CHAVE_ARMAZENAMENTO = "cityfix-ocorrencias";
 
-// Confere se um objeto salvo tem o formato combinado.
+// Último conteúdo lido ou gravado. Só gravamos de novo quando os dados
+// mudarem de verdade; assim uma aba que só trocou um filtro não
+// sobrescreve o que outra aba acabou de salvar.
+let ultimoTextoSalvo = JSON.stringify(ocorrencias);
+
+function ehTextoPreenchido(valor) {
+  return typeof valor === "string" && valor.trim() !== "";
+}
+
+function ehInteiroPositivo(valor) {
+  return Number.isInteger(valor) && valor > 0;
+}
+
+// Confere a estrutura de um objeto salvo: { id, tipo, bairro, descricao, status, votos }.
+// Não exige que tipo e bairro estejam numa lista fixa, para que uma opção
+// nova no formulário não invalide os dados já salvos.
 function ocorrenciaValida(item) {
   return item !== null &&
     typeof item === "object" &&
-    typeof item.id === "number" &&
-    TIPOS_OCORRENCIA.includes(item.tipo) &&
-    BAIRROS_OCORRENCIA.includes(item.bairro) &&
+    ehInteiroPositivo(item.id) &&
+    ehTextoPreenchido(item.tipo) &&
+    ehTextoPreenchido(item.bairro) &&
     typeof item.descricao === "string" &&
     STATUS_OCORRENCIA.includes(item.status) &&
-    typeof item.votos === "number";
+    Number.isInteger(item.votos) &&
+    item.votos >= 0;
+}
+
+// Fica só com os itens válidos e descarta ids repetidos (mantém o primeiro).
+function filtrarOcorrenciasValidas(lista) {
+  const idsVistos = [];
+  return lista.filter((item) => {
+    if (!ocorrenciaValida(item) || idsVistos.includes(item.id)) {
+      return false;
+    }
+    idsVistos.push(item.id);
+    return true;
+  });
 }
 
 // Troca o conteúdo do array sem criar outro array, para que todos os
@@ -146,40 +175,40 @@ function substituirOcorrencias(novaLista) {
 }
 
 function salvarOcorrencias() {
+  const texto = JSON.stringify(ocorrencias);
+  if (texto === ultimoTextoSalvo) {
+    return;
+  }
   try {
-    localStorage.setItem(CHAVE_ARMAZENAMENTO, JSON.stringify(ocorrencias));
+    localStorage.setItem(CHAVE_ARMAZENAMENTO, texto);
+    ultimoTextoSalvo = texto;
   } catch (erro) {
     // Armazenamento bloqueado ou cheio: o site continua funcionando,
     // só não guarda as mudanças depois de recarregar.
   }
 }
 
+// Lê os dados salvos. Devolve true se o array foi trocado pelo conteúdo salvo.
 function carregarOcorrencias() {
   try {
     const texto = localStorage.getItem(CHAVE_ARMAZENAMENTO);
     if (texto === null) {
-      return;
+      return false;
     }
     const salvas = JSON.parse(texto);
-    if (Array.isArray(salvas) && salvas.length > 0 && salvas.every(ocorrenciaValida)) {
-      substituirOcorrencias(salvas);
-    } else {
+    const validas = Array.isArray(salvas) ? filtrarOcorrenciasValidas(salvas) : [];
+    if (validas.length === 0) {
       localStorage.removeItem(CHAVE_ARMAZENAMENTO);
+      return false;
     }
+    substituirOcorrencias(validas);
+    // Se algum item inválido foi descartado, a próxima gravação regrava a lista limpa.
+    ultimoTextoSalvo = validas.length === salvas.length ? texto : null;
+    return true;
   } catch (erro) {
     // Dado salvo corrompido ou armazenamento indisponível: usa os dados de exemplo.
+    return false;
   }
-}
-
-// ID único para uma ocorrência nova (usado pelo formulário).
-function gerarProximoId() {
-  let maior = 0;
-  ocorrencias.forEach((ocorrencia) => {
-    if (ocorrencia.id > maior) {
-      maior = ocorrencia.id;
-    }
-  });
-  return maior + 1;
 }
 
 carregarOcorrencias();

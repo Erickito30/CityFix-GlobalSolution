@@ -635,6 +635,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-primary); 
   font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .hud-topo { top: 1.25rem; color: var(--color-ink); background: rgb(255 255 255 / 88%); }

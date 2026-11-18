@@ -13,12 +13,16 @@ const filtroStatus = document.getElementById("filtro-status");
 const botaoLimparFiltros = document.getElementById("limpar-filtros");
 const resumoOcorrencias = document.getElementById("resumo-ocorrencias");
 const mensagemLista = document.getElementById("mensagem-lista");
+// Campos do formulário (Pietro): as opções vêm das mesmas listas de dados.js.
+const campoTipo = document.getElementById("campo-tipo");
+const campoBairro = document.getElementById("campo-bairro");
 
 // ---------- Funções auxiliares ----------
 
-// Retorna os valores sem repetição, em ordem alfabética.
-function valoresUnicos(campo) {
-  const valores = [];
+// Lista fixa + qualquer valor diferente que exista nos dados salvos,
+// sem repetição e em ordem alfabética.
+function opcoesDe(listaFixa, campo) {
+  const valores = listaFixa.slice();
   ocorrencias.forEach((ocorrencia) => {
     if (!valores.includes(ocorrencia[campo])) {
       valores.push(ocorrencia[campo]);
@@ -51,11 +55,19 @@ function preencherSelect(select, valores, textoTodos) {
   select.value = valores.includes(valorAtual) ? valorAtual : "";
 }
 
-// Atualiza as opções dos filtros (bairros e tipos novos vindos do formulário entram aqui).
-function atualizarOpcoesFiltros() {
-  preencherSelect(filtroTipo, valoresUnicos("tipo"), "Todos os tipos");
-  preencherSelect(filtroBairro, valoresUnicos("bairro"), "Todos os bairros");
+// Monta as opções dos filtros e do formulário a partir das listas de dados.js.
+// Roda ao abrir a página (e quando outra aba muda os dados), não a cada clique.
+function atualizarOpcoes() {
+  const tipos = opcoesDe(TIPOS_OCORRENCIA, "tipo");
+  const bairros = opcoesDe(BAIRROS_OCORRENCIA, "bairro");
+
+  preencherSelect(filtroTipo, tipos, "Todos os tipos");
+  preencherSelect(filtroBairro, bairros, "Todos os bairros");
   preencherSelect(filtroStatus, STATUS_OCORRENCIA, "Todos os status");
+
+  // No formulário só entram os valores oficiais.
+  preencherSelect(campoTipo, TIPOS_OCORRENCIA, "Selecione o tipo");
+  preencherSelect(campoBairro, BAIRROS_OCORRENCIA, "Selecione o bairro");
 }
 
 // Aplica os três filtros juntos. Filtro vazio significa "todos".
@@ -79,7 +91,7 @@ function ordenarPorVotos(lista) {
 
 // Classe CSS do selo de status: "Em análise" vira "status-em-analise".
 function classeDoStatus(status) {
-  const semAcento = status.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const semAcento = status.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   return "status-" + semAcento.toLowerCase().replace(/\s+/g, "-");
 }
 
@@ -147,8 +159,6 @@ function renderizarOcorrencias() {
     return;
   }
 
-  atualizarOpcoesFiltros();
-
   const visiveis = ordenarPorVotos(filtrarOcorrencias());
   listaOcorrencias.textContent = "";
 
@@ -198,10 +208,11 @@ function apoiarOcorrencia(id) {
 function calcularIndicadores() {
   const total = ocorrencias.length;
   const resolvidas = ocorrencias.filter((ocorrencia) => ocorrencia.status === "Resolvida").length;
+  const abertas = ocorrencias.filter((ocorrencia) => ocorrencia.status === "Aberta").length;
   const percentual = total === 0 ? 0 : Math.round((resolvidas / total) * 100);
   const maisApoiada = total === 0 ? null : ordenarPorVotos(ocorrencias)[0];
 
-  return { total, resolvidas, percentual, maisApoiada };
+  return { total, resolvidas, abertas, percentual, maisApoiada };
 }
 
 function preencherIndicador(nome, texto) {
@@ -217,6 +228,8 @@ function atualizarIndicadores() {
   preencherIndicador("total", String(indicadores.total));
   preencherIndicador("resolved", String(indicadores.resolvidas));
   preencherIndicador("resolved-rate", indicadores.percentual + "%");
+  // Etiqueta sobre a foto da página inicial.
+  preencherIndicador("open", indicadores.abertas + (indicadores.abertas === 1 ? " ocorrência aberta" : " ocorrências abertas"));
   preencherIndicador(
     "most-supported",
     indicadores.maisApoiada
@@ -236,9 +249,11 @@ function atualizarIndicadores() {
 
 if (botaoLimparFiltros) {
   botaoLimparFiltros.addEventListener("click", () => {
-    filtroTipo.value = "";
-    filtroBairro.value = "";
-    filtroStatus.value = "";
+    [filtroTipo, filtroBairro, filtroStatus].forEach((filtro) => {
+      if (filtro) {
+        filtro.value = "";
+      }
+    });
     renderizarOcorrencias();
     if (mensagemLista) {
       mensagemLista.textContent = "Filtros limpos. Mostrando todas as ocorrências.";
@@ -257,4 +272,13 @@ if (listaOcorrencias) {
   });
 }
 
+// Se outra aba salvar mudanças, esta aba recarrega os dados e se atualiza.
+window.addEventListener("storage", (evento) => {
+  if (evento.key === CHAVE_ARMAZENAMENTO && carregarOcorrencias()) {
+    atualizarOpcoes();
+    renderizarOcorrencias();
+  }
+});
+
+atualizarOpcoes();
 renderizarOcorrencias();

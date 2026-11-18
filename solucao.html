@@ -45,25 +45,17 @@
       <form id="formulario-ocorrencia" class="form-ocorrencia" novalidate>
         <div class="campo">
           <label for="campo-tipo">Tipo do problema</label>
+          <!-- Opções preenchidas por js/simulacao.js a partir de TIPOS_OCORRENCIA (js/dados.js). -->
           <select id="campo-tipo" name="tipo" required aria-describedby="erro-tipo">
             <option value="">Selecione o tipo</option>
-            <option value="Buraco na rua">Buraco na rua</option>
-            <option value="Calçada quebrada">Calçada quebrada</option>
-            <option value="Falta de rampa">Falta de rampa</option>
-            <option value="Iluminação">Iluminação</option>
-            <option value="Lixo acumulado">Lixo acumulado</option>
           </select>
           <p class="erro-campo" id="erro-tipo" hidden></p>
         </div>
         <div class="campo">
           <label for="campo-bairro">Bairro</label>
+          <!-- Opções preenchidas por js/simulacao.js a partir de BAIRROS_OCORRENCIA (js/dados.js). -->
           <select id="campo-bairro" name="bairro" required aria-describedby="erro-bairro">
             <option value="">Selecione o bairro</option>
-            <option value="Centro">Centro</option>
-            <option value="Mooca">Mooca</option>
-            <option value="Pinheiros">Pinheiros</option>
-            <option value="Saúde">Saúde</option>
-            <option value="Vila Mariana">Vila Mariana</option>
           </select>
           <p class="erro-campo" id="erro-bairro" hidden></p>
         </div>
